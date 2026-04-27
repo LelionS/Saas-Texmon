@@ -5,7 +5,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from weasyprint import HTML
+
 from django.utils import timezone
 from .models import Quotation, QuotationItem
 from MasterData.models import ClientMasterData
@@ -151,6 +151,7 @@ class QuotationAdmin(admin.ModelAdmin):
 
     # PDF generation
     def generate_pdf_view(self, request, quotation_id):
+        from weasyprint import HTML 
         quotation = self.get_object(request, quotation_id)
         client_master = None
         logo_path = os.path.join(settings.BASE_DIR, "static", "images", "logo.png")
